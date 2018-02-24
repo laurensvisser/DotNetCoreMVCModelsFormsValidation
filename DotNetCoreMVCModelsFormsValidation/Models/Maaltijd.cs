@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotNetCoreMVCModelsFormsValidation.Models
 {
@@ -13,11 +14,11 @@ namespace DotNetCoreMVCModelsFormsValidation.Models
     }
     public class Maaltijd
     {
-        public int Id { get; set; }
+        public int Id { get; set; }      
         public string Naam { get; set; }
         public MaaltijdType Type { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal Prijs { get; set; }
         public List<Gang> Gang { get; set; }
     }
 }
