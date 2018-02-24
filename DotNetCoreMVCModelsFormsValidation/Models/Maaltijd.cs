@@ -13,9 +13,11 @@ namespace DotNetCoreMVCModelsFormsValidation.Models
     }
     public class Maaltijd
     {
+        public int Id { get; set; }
         public string Naam { get; set; }
         public MaaltijdType Type { get; set; }
 
         public decimal Price { get; set; }
+        public List<Gang> Gang { get; set; }
     }
 }
