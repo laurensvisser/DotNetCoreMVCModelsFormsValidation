@@ -13,22 +13,7 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
         private List<Maaltijd> maaltijden = new List<Maaltijd>();
         public MaaltijdController()
         {
-            maaltijden.Add(
-                new Maaltijd
-                {
-                    Id =1,
-                    Type =MaaltijdType.Ontbijt,
-                    Naam ="Ontbijt1",
-                    Prijs =25
-                });
-            maaltijden.Add(
-                new Maaltijd
-                {
-                    Id = 10,
-                    Type = MaaltijdType.Lunch,
-                    Naam = "Dagmenu",
-                    Prijs = 35
-                });
+ 
         }
         public ViewResult Index()
         {
@@ -51,9 +36,6 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
             if (ModelState.IsValid)
             {
                 maaltijden.Add(maaltijd);
-                TempData["maaltijden"] = JsonConvert.SerializeObject(maaltijden);
-                TempData.Keep();
-                //return View("Finish", maaltijd);
                 return RedirectToAction("Index");
             }
             else
