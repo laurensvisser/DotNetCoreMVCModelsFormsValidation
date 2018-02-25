@@ -25,6 +25,11 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
             return View(db.Maaltijd.ToList());
         }
 
+        public ViewResult Filter(string keyword)
+        {
+            return View("Index",db.Maaltijd.FromSql($"Select * from Maaltijd  where Type = {keyword} ").ToList());
+        }
+
         [HttpGet]
         public ViewResult Create()
         {
