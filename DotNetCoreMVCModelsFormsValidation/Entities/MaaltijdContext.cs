@@ -21,8 +21,6 @@ namespace DotNetCoreMVCModelsFormsValidation.Entities
         {
             modelBuilder.Entity<Maaltijd>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Naam)
                     .IsRequired()
                     .HasMaxLength(50);

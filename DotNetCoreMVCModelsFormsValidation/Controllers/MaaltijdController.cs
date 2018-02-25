@@ -28,7 +28,7 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
         [HttpGet]
         public ViewResult Create()
         {
-            return View();
+            return View(new Maaltijd());
         }
 
         [HttpPost]
