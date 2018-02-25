@@ -13,6 +13,7 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
     public class MaaltijdController : Controller
     {
         private MaaltijdContext db;
+        //Scaffold-DbContext -Connection "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Maaltijden;Integrated Security=True" -Provider Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -Context MaaltijdContext
 
         public MaaltijdController()
         {
