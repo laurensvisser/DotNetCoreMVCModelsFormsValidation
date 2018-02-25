@@ -21,7 +21,9 @@ namespace DotNetCoreMVCModelsFormsValidation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddSessionStateTempDataProvider(); //http://www.binaryintellect.net/articles/090f0fe3-d52c-4386-9d30-6311c2d62738.aspx
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +41,7 @@ namespace DotNetCoreMVCModelsFormsValidation
 
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
             //app.UseMvc(routes =>
             //{
