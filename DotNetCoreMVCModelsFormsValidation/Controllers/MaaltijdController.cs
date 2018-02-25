@@ -4,30 +4,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DotNetCoreMVCModelsFormsValidation.Models;
+using DotNetCoreMVCModelsFormsValidation.Entities;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetCoreMVCModelsFormsValidation.Controllers
 {
     public class MaaltijdController : Controller
     {
-        private List<Maaltijd> maaltijden = new List<Maaltijd>();
+        private MaaltijdContext db;
+
         public MaaltijdController()
         {
- 
+            db = new MaaltijdContext();
         }
+
         public ViewResult Index()
         {
-            if (TempData.Peek("maaltijden") != null)
-            {
-                maaltijden = JsonConvert.DeserializeObject<List<Maaltijd>>(TempData["maaltijden"].ToString());
-            }
-            return View(maaltijden);
+            return View(db.Maaltijd.ToList());
         }
 
         [HttpGet]
         public ViewResult Create()
         {
-            return View(new Maaltijd { Type=MaaltijdType.Ontbijt });
+            return View();
         }
 
         [HttpPost]
@@ -35,7 +35,8 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
         {
             if (ModelState.IsValid)
             {
-                maaltijden.Add(maaltijd);
+                db.Maaltijd.Add(maaltijd);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
