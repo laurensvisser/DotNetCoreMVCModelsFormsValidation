@@ -25,8 +25,8 @@
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
                 <p> </p>
-                <select asp-for="Type" asp-items="@Model.ToList()">
-                    <option>-- Selecteer --</option>
+                <select asp-for="Type" asp-items="Model.TypeList()">
+                    <option>-- Selecteer een type maaltijd --</option>
                 </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>

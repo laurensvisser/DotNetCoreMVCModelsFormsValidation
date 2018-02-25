@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DotNetCoreMVCModelsFormsValidation.Models
@@ -15,13 +14,22 @@ namespace DotNetCoreMVCModelsFormsValidation.Models
     }
     public class Maaltijd
     {
-        public int Id { get; set; }      
+        [Required]
+        public int Id { get; set; }
+
+        [Display(Name ="Beschrijving")]
+        [Required(ErrorMessage ="Gelieve een beschrijving op te geven")]
         public string Naam { get; set; }
+
+        [Display(Name = "Type maaltijd")]
         public MaaltijdType Type { get; set; }
 
+        [Required]
+        [Range(typeof(decimal), "5", "150", ErrorMessage = "Voorzie voor {0} een bedrag tussen {1} en {2}")]
         public decimal Prijs { get; set; }
 
-        public List<SelectListItem> ToList()
+
+        public List<SelectListItem> TypeList()
         {
             List<SelectListItem> maaltijdTypes = new List<SelectListItem>();
             foreach (string type in Enum.GetNames(typeof(MaaltijdType)))

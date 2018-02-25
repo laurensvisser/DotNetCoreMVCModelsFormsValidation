@@ -14,10 +14,12 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
         public MaaltijdController()
         {
             maaltijden.Add(
-                new Maaltijd { Id=1,
-                                Type =MaaltijdType.Ontbijt,
-                                Naam ="Ontbijt1",
-                                Prijs =25
+                new Maaltijd
+                {
+                    Id =1,
+                    Type =MaaltijdType.Ontbijt,
+                    Naam ="Ontbijt1",
+                    Prijs =25
                 });
             maaltijden.Add(
                 new Maaltijd
@@ -46,10 +48,18 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
         [HttpPost]
         public IActionResult Create(Maaltijd maaltijd)
         {
-            maaltijden.Add(maaltijd);
-            TempData["maaltijden"] = JsonConvert.SerializeObject(maaltijden);
-            //TempData.Keep();
-            return View("Finish", maaltijd);
+            if (ModelState.IsValid)
+            {
+                maaltijden.Add(maaltijd);
+                TempData["maaltijden"] = JsonConvert.SerializeObject(maaltijden);
+                TempData.Keep();
+                //return View("Finish", maaltijd);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(maaltijd);
+            }
         }
     }
 }
