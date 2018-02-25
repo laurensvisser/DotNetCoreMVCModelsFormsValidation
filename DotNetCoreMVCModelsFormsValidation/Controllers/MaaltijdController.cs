@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DotNetCoreMVCModelsFormsValidation.Models;
+using Newtonsoft.Json;
 
 namespace DotNetCoreMVCModelsFormsValidation.Controllers
 {
@@ -16,10 +17,7 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
                 new Maaltijd { Id=1,
                                 Type =MaaltijdType.Ontbijt,
                                 Naam ="Ontbijt1",
-                                Prijs =25,
-                                Gang = new List<Gang> {
-                                    new Gang{Id=1, Beschrijving="Ontbijt Delux met Champagne", Type=GangType.Hoofdgerecht }
-                                }
+                                Prijs =25
                 });
             maaltijden.Add(
                 new Maaltijd
@@ -27,19 +25,31 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
                     Id = 10,
                     Type = MaaltijdType.Lunch,
                     Naam = "Dagmenu",
-                    Prijs = 35,
-                    Gang = new List<Gang> {
-                                    new Gang{Id=102, Beschrijving="Tomatensoep met balletjes", Type=GangType.Voorgerecht },
-                                    new Gang{Id=103, Beschrijving="Vol au vent", Type=GangType.Hoofdgerecht },
-                                    new Gang{Id=104, Beschrijving="Dame blanche", Type=GangType.Nagerecht }
-                                }
+                    Prijs = 35
                 });
         }
-        public IActionResult Index()
+        public ViewResult Index()
         {
+            if (TempData.Peek("maaltijden") != null)
+            {
+                maaltijden = JsonConvert.DeserializeObject<List<Maaltijd>>(TempData["maaltijden"].ToString());
+            }
             return View(maaltijden);
         }
 
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View(new Maaltijd { Type=MaaltijdType.Ontbijt });
+        }
 
+        [HttpPost]
+        public IActionResult Create(Maaltijd maaltijd)
+        {
+            maaltijden.Add(maaltijd);
+            TempData["maaltijden"] = JsonConvert.SerializeObject(maaltijden);
+            //TempData.Keep();
+            return View("Finish", maaltijd);
+        }
     }
 }
