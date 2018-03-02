@@ -19,7 +19,7 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
                     Id =1,
                     Type =MaaltijdType.Ontbijt,
                     Naam ="Ontbijt1",
-                    Prijs =25
+                    Prijs =25.50m
                 });
             maaltijden.Add(
                 new Maaltijd
@@ -27,7 +27,7 @@ namespace DotNetCoreMVCModelsFormsValidation.Controllers
                     Id = 10,
                     Type = MaaltijdType.Lunch,
                     Naam = "Dagmenu",
-                    Prijs = 35
+                    Prijs = 35m
                 });
         }
         public ViewResult Index()
