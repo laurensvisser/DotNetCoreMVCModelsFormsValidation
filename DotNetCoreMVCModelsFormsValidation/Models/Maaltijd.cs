@@ -23,11 +23,16 @@ namespace DotNetCoreMVCModelsFormsValidation.Models
 
         public List<SelectListItem> TypeList()
         {
+            //List<SelectListItem> maaltijdTypes = new List<SelectListItem>();
+            //foreach (string type in Enum.GetNames(typeof(MaaltijdType)))
+            //{
+            //    maaltijdTypes.Add(new SelectListItem() { Text = type, Value = type});
+            //}
+
             List<SelectListItem> maaltijdTypes = new List<SelectListItem>();
-            foreach (string type in Enum.GetNames(typeof(MaaltijdType)))
-            {
-                maaltijdTypes.Add(new SelectListItem() { Text = type, Value = type});
-            }
+            Enum.GetNames(typeof(MaaltijdType))
+                .ToList()
+                .ForEach(m => maaltijdTypes.Add(new SelectListItem() { Text = m, Value = m }));
             return maaltijdTypes;
         }
     }
